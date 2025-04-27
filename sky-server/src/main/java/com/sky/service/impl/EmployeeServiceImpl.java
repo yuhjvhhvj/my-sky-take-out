@@ -102,4 +102,18 @@ public class EmployeeServiceImpl implements EmployeeService {
         List<Employee> employees = page.getResult();
         return new PageResult(total,employees);
     }
+
+    /**
+     * 改变账户状态
+     * @param status
+     * @param id
+     */
+    @Override
+    public void changeStatus(Integer status, Long id){
+        Employee employee= Employee.builder()
+                .id(id)
+                .status(status)
+                .build();
+        employeeMapper.update(employee);
+    }
 }

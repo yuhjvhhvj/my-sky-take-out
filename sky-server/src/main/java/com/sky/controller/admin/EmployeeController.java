@@ -94,4 +94,15 @@ public class EmployeeController {
         PageResult pageReult = employeeService.pageQuery(employeePageQueryDTO);
         return Result.success(pageReult);
     }
+
+    /**
+     * 改变账户状态
+     * @return
+     */
+    @PostMapping("/status/{status}")
+    public Result changeStatus(@PathVariable Integer status, Long id) {
+        log.info("改变账户状态："+status);
+        employeeService.changeStatus(status,id);
+        return Result.success();
+    }
 }

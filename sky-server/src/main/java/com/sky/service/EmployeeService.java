@@ -26,4 +26,11 @@ public interface EmployeeService {
      * @param employeePageQueryDTO
      */
     PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
+
+    /**
+     * 改变账户状态
+     * @param status
+     * @param id
+     */
+    void changeStatus(Integer status, Long id);
 }
