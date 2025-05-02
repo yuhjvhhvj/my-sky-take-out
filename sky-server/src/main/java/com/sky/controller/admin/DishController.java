@@ -10,9 +10,11 @@ import com.sky.vo.DishVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/admin/dish")
@@ -20,6 +22,8 @@ import java.util.List;
 public class DishController {
     @Autowired
     private DishService dishService;
+    @Autowired
+    private RedisTemplate redisTemplate;
     /**
      * 新增菜品
      * @param dishDTO
@@ -28,6 +32,8 @@ public class DishController {
     @PostMapping
     public Result save(@RequestBody DishDTO dishDTO) {
         dishService.saveWithFlavor(dishDTO);
+        String key = "dish_" + dishDTO.getCategoryId();
+        redisTemplate.delete(key);
         return Result.success();
     }
 
@@ -44,13 +50,15 @@ public class DishController {
     }
 
     /**
-     * 删除菜品
+     * 批量删除菜品
      * @return
      */
     @DeleteMapping
     public Result delete(@RequestParam List<Long> ids) {
         log.info("删除菜品");
         dishService.deleteBatch(ids);
+        Set keys = redisTemplate.keys("dish_*") ;
+        redisTemplate.delete(keys);
         return Result.success();
     }
 
@@ -74,6 +82,8 @@ public class DishController {
     @PutMapping
     public Result update(@RequestBody DishDTO dishDTO) {
         dishService.updateWithFlavors(dishDTO);
+        Set keys = redisTemplate.keys("dish_*") ;
+        redisTemplate.delete(keys);
         return Result.success();
     }
 
@@ -97,6 +107,8 @@ public class DishController {
     @PostMapping("/status/{status}")
     public Result<String> startOrStop(@PathVariable Integer status, Long id){
         dishService.startOrStop(status,id);
+        Set keys = redisTemplate.keys("dish_*") ;
+        redisTemplate.delete(keys);
         return Result.success();
     }
 }
