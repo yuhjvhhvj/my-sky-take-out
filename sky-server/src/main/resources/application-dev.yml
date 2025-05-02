@@ -10,3 +10,11 @@ sky:
     bucket-name: web-sky-ywj
     endpoint: https://oss-cn-guangzhou.aliyuncs.com
     region: cn-guangzhou
+  redis:
+    host: localhost
+    port: 6379
+    password: 123456
+    database: 0
+  wechat:
+    appid: wxbe2aaae528aba651
+    secret: 5425e96eb51911c19a406eb33bab11f0
