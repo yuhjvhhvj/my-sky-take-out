@@ -18,3 +18,5 @@ sky:
   wechat:
     appid: wxbe2aaae528aba651
     secret: 5425e96eb51911c19a406eb33bab11f0
+    notifyUrl: https://localhost/notify/paySuccess
+    refundNotifyUrl: https://localhost/notify/refundSuccess
