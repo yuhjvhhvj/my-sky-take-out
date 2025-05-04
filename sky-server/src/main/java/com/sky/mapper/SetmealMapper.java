@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.Map;
 import java.util.List;
 
 @Mapper
@@ -77,4 +78,10 @@ public interface SetmealMapper {
             "where sd.setmeal_id = #{setmealId}")
     List<DishItemVO> getDishItemBySetmealId(Long setmealId);
 
+    /**
+     * 根据条件统计套餐数量
+     * @param map
+     * @return
+     */
+    Integer countByMap(Map map);
 }
