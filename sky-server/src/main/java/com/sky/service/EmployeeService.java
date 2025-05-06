@@ -46,4 +46,10 @@ public interface EmployeeService {
      * @param employeeDTO
      */
     void update(EmployeeDTO employeeDTO);
+
+    /**
+     * 根据用户名查询用户
+     * @param username
+     */
+    Employee getByUsername(String username);
 }

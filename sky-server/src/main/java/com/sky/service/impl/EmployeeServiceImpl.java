@@ -143,4 +143,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         employeeMapper.update(employee);
     }
+
+    /**
+     * 根据用户名查询用户
+     * @param username
+     */
+    public Employee getByUsername(String username){
+        return employeeMapper.getByUsername(username);
+    }
 }
